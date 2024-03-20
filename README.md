@@ -4,7 +4,7 @@
 
 Diese Anwendung ist ein Klon von Trello, erstellt zu Bildungszwecken. Sie wurde implementiert in reinem JavaScript.
 
-#### Eine Live-Demo ist unter [diesem Link](https://board-organizer-wjoschka.netlify.app) verfügbar.
+### Eine Live-Demo ist unter [diesem Link](https://board-organizer-wjoschka.netlify.app) verfügbar.
 
 ## Funktionen
 
