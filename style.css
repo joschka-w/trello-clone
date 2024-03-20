@@ -1,0 +1,489 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: var(--font-size);
+  letter-spacing: 0.05ch;
+  color: rgb(212, 212, 212);
+}
+
+:root {
+  --background: #222;
+  --primary-color: rgb(48, 80, 208);
+  --primary-color-hover: rgb(35, 60, 161);
+  --list-color: #121212;
+  --btn-hover-color: rgb(48, 48, 48);
+  --card-color: rgb(32, 32, 32);
+  --font-size: 0.9rem;
+  --card-width: 19rem;
+  --list-padding: 0.7rem;
+  --dropdown-width: 18rem;
+}
+
+body {
+  background-color: var(--background);
+  padding: 5rem;
+}
+
+.bg-image {
+  height: 100vh;
+  width: 100vw;
+
+  background-image: url(img/bg2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  z-index: -100;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Reusable classes */
+.generic-btn {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.5ch;
+
+  border: none;
+  font-size: var(--font-size);
+  cursor: pointer;
+
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.generic-btn:hover {
+  background-color: var(--btn-hover-color);
+}
+
+.submit-btn {
+  height: 2rem;
+  width: 9rem;
+  border-radius: 0.5ch;
+  border: none;
+
+  background-color: var(--primary-color);
+
+  font-size: var(--font-size);
+  letter-spacing: 0.05ch;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.submit-btn:active {
+  background-color: #303030;
+}
+
+.text-input {
+  height: 2rem;
+  width: calc(var(--card-width) - 1.5rem);
+  border-radius: 0.5ch;
+
+  background-color: #303030;
+  border: 2px solid rgb(45, 46, 59);
+  font-size: var(--font-size);
+  padding: 15px 4px;
+  letter-spacing: 0.05ch;
+
+  caret-color: white;
+}
+
+.text-input:focus {
+  outline: 1.5px solid var(--primary-color);
+}
+
+.text-input:hover {
+  background-color: #393939;
+}
+
+.textarea {
+  background-color: var(--card-color);
+  padding: 0.7rem;
+  border-radius: 1rem;
+
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+/* Board */
+.board {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Add List Button */
+.add-list-btn {
+  flex: 0 0 var(--card-width);
+  height: 3rem;
+  border-radius: 1rem;
+
+  letter-spacing: 0.1ch;
+  font-size: var(--font-size);
+  text-align: left;
+  padding-left: 1ch;
+
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: none;
+
+  transition: background-color 0.1s ease-in;
+}
+
+.add-list-btn:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+
+  transition: background-color 0.1s ease-in;
+}
+
+/* Listname input container */
+.create-list-name {
+  width: var(--card-width);
+  padding: 0.7rem;
+  border-radius: 1rem;
+
+  background-color: var(--list-color);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1ch;
+}
+
+.create-list-btns-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.list-name-cancel-btn:active {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.hide {
+  display: none;
+}
+
+/* List */
+.list-wrapper {
+  background-color: var(--list-color);
+  padding: var(--list-padding);
+  border-radius: 1rem;
+
+  flex: 0 0 var(--card-width);
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.list-wrapper.list-dragging {
+  opacity: 0.5;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+.list-title {
+  background-color: var(--list-color);
+  border: none;
+
+  font-size: 1rem;
+  letter-spacing: 0.2ch;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 0.5rem;
+
+  cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+}
+
+.edit-list-title-input {
+  border: none;
+
+  font-size: 1rem;
+  letter-spacing: 0.2ch;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 0.5rem;
+
+  cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+}
+
+.list-options-btn {
+  width: 2.4rem;
+}
+
+/* Card */
+.card {
+  background-color: var(--card-color);
+  width: 100%;
+  min-height: 2.5rem;
+
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1.5px solid var(--list-color);
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.8ch;
+}
+
+.card:hover {
+  border: 1.5px solid var(--primary-color);
+}
+
+.card-text {
+  font-size: var(--font-size);
+  text-wrap: pretty;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-card-btn {
+  width: 2rem;
+  height: 2rem;
+
+  background-color: var(--card-color);
+
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  position: absolute;
+  right: 0.3ch;
+  top: 0.3ch;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-card-btn:hover {
+  background-color: var(--btn-hover-color);
+}
+
+.add-card-btn {
+  height: 2rem;
+  padding: 0 1ch;
+  border: none;
+  border-radius: 0.8ch;
+
+  background-color: var(--list-color);
+
+  text-align: left;
+  font-size: var(--font-size);
+  letter-spacing: 0.1ch;
+
+  cursor: pointer;
+}
+
+.add-card-btn:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.add-card-btn:active {
+  background-color: var(--list-color);
+}
+
+.card.dragging {
+  opacity: 0.5;
+}
+
+/* Edit card window */
+.edit-card-wrapper {
+  display: flex;
+  gap: 1ch;
+
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.edit-card-form {
+  z-index: inherit;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1ch;
+  flex: 0 0 calc(var(--card-width) - var(--list-padding) * 2);
+}
+
+.edit-card-wrapper::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 99;
+}
+
+.edit-card-input {
+  padding: 0.6rem;
+}
+
+.edit-card-submit-btn {
+  width: 6rem;
+  pointer-events: auto;
+}
+
+.edit-cards-options-btn-wrapper {
+  z-index: inherit;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.7ch;
+  flex: 0 0 auto;
+}
+
+.edit-card-options-btn {
+  background-color: rgb(52, 55, 58);
+  border: none;
+  border-radius: 0.2rem;
+  cursor: pointer;
+
+  padding: 1ch 2.5ch;
+  padding-left: 1.75ch;
+
+  width: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5ch;
+
+  align-self: flex-start;
+
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.2ch;
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.edit-card-options-btn:hover {
+  background-color: rgb(61, 65, 68);
+}
+
+.edit-card-options-btn:active {
+  background-color: rgb(52, 55, 58);
+}
+
+/* Add card input window */
+.create-card-wrapper {
+  background-color: var(--list-color);
+  padding-top: 0;
+  border-radius: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.create-card-btns {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* List dropdown-menu */
+.list-dropdown-wrapper {
+  background-color: rgb(35, 38, 40);
+
+  border: solid 1.3px rgb(48, 48, 48);
+  border-radius: 0.7rem;
+
+  width: var(--dropdown-width);
+  padding: 0.5rem;
+  z-index: 100;
+
+  position: absolute;
+  top: 115%;
+  left: 90%;
+}
+
+.list-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.list-dropdown-title {
+  margin-top: 0.45rem;
+}
+
+.list-dropdown-close-btn {
+  position: absolute;
+  right: 0;
+  top: 3%;
+}
+
+.list-dropdown-close-btn:hover {
+  background-color: rgb(41, 45, 47);
+}
+
+.list-dropdown-title {
+  font-weight: normal;
+}
+
+.list-dropdown-item {
+  list-style-type: none;
+}
+
+.list-dropdown-item-btn {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+
+  height: 2.6rem;
+  width: var(--dropdown-width);
+  transform: translateX(-0.6rem);
+  padding-left: 1.3rem;
+
+  text-align: left;
+  cursor: pointer;
+}
+
+.list-dropdown-item-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ? FOR GOOGLE ICONS, IGONORE */
+.material-icons-outlined.md-18 {
+  font-size: 18px;
+}
+
+.material-symbols-outlined.md-18 {
+  font-size: 18px;
+}
