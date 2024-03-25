@@ -10,8 +10,8 @@ Dies ist ein Klon von Trello, erstellt zu Bildungszwecken und wurde implementier
 
 - Hinzufügen, Bearbeiten und Löschen von Listen
 - Hinzufügen, Bearbeiten und Löschen von Karten innerhalb einer Liste
-- Drag-and-Drop-Funktionalität zum Verschieben von Listen und Karten
-- Daten werden lokal auf dem System des Benutzers gespeichert, indem 'localStorage' verwendet wird
+- Drag-and-Drop-Feature zum Verschieben von Listen und Karten
+- Daten werden lokal auf dem System des Users gespeichert, indem 'localStorage' verwendet wird
 
 ## Verwendung
 
